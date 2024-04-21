@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title >Bank information</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <style>
+        body {
+            
+            background-image:url(bank.jpg);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 98vh;
+        }
+        div
+        {
+            box-sizing: border-box;
+            background-color:rgba(228, 241, 254, 0.3);
+            height: 600px;
+            width :400px;
+            margin: auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px rgb(6, 70, 76) ;
+            margin-right:10% ;
+            border-left: groove;
+            border-top: groove;
+           
+           
+        }
+        input
+        {
+            height: 30px;
+            width: 260px;
+            border: solid rgb(54, 54, 123);
+            border-radius: 30px;
+            padding-left: 20px;
+         
+           
+        }
+        input:hover
+        {
+         transform: scale(1.04);
+        }
+        label
+        {
+            color: white;
+            font-weight: bolder;
+        }
+        #submit:hover
+        {
+            background-color: greenyellow;
+        }
+        #reset:hover
+        {
+            background-color: yellow;
+        }
+        #submit:active{
+            background-color: rgb(15, 250, 15);
+            
+        }
+        #reset:active
+        {
+            background-color: rgb(15, 250, 15);
+            background-color: rgb(198, 195, 7);
+        }
+        ::placeholder        {
+            padding-left: 15px;
+        }
+       select
+        {
+            height: 39px;
+            width: 290px;
+            border: solid rgb(54, 54, 123);
+            border-radius: 30px;
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+   function valid()
+   {
+   var p=document.getElementById("acc").value;
+  var cp=document.getElementById("cacc").value
+
+   if(p!=cp)
+   {
+       window.alert("Retype account number");
+   }
+   }
+   </script>
+</head>
+<body>
+    
+    <div>
+        <h1 style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">Bank information </h1>
+    
+        <form>
+            <label> Bank Name </label>
+            <br>
+            <input type="text" placeholder="eg : SBI,HDFC">
+            <br> <br>
+            <label>Account type</label>
+            <br>
+            <select >
+                <option >Savings</option>
+                <option >Current</option>
+                <option >Recurring Deposit</option>
+                <option >Fixed Deposit</option>
+
+            </select>
+            <br><br>
+            <label> Account number</label>
+            <br>
+            <input id="acc" type="text" >
+            
+            <br><br>
+            <label>confirm Account Number</label>
+            <br>
+            <input id="cacc" type="password"  onblur="valid()">
+            <br><br>
+    
+            <label>Initial deposit </label>
+            <br>
+            <input type="text" placeholder="in rupees">
+             <br>
+           
+            <br><br><br>
+            <input id="submit" style=" padding: 10px; width: 80px; font-weight: bolder; border-radius: 25px; height: 40px;width: 100px;" type="submit" value="SUBMIT">
+            <input id="reset" style=" padding: 10px; width: 80px;float: right; font-weight: bolder; border-radius: 25px; height: 40px; width: 100px;" type="reset" value="RESET">
+
+
+            </button>
+        </form>
+    </div>
+</body>
+</html>

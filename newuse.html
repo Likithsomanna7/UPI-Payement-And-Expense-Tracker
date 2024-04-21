@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title >customer information</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    
+    <style>
+        body {
+            
+            background-image:url(newreg.jpg);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 98vh;
+        }
+        div
+        {
+            box-sizing: border-box;
+            background-color:rgba(228, 241, 254, 0.3);
+            height: 600px;
+            width :400px;
+            margin: auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px rgb(76, 85, 129) ;
+            border-left: groove;
+            border-top: groove;
+            margin-right: 20%;
+           
+           
+        }
+        input
+        {
+            height: 30px;
+            width: 270px;
+            border: solid rgb(54, 54, 123);
+            border-radius: 30px;
+            padding-left: 20px;
+         
+           
+        }
+      
+        input:hover
+        {
+         transform: scale(1.04);
+        }
+        label
+        {
+            color: white;
+            font-weight: bolder;
+        }
+        #submit:hover
+        {
+            background-color: greenyellow;
+        }
+        #reset:hover
+        {
+            background-color: yellow;
+        }
+        #submit:active{
+            background-color: rgb(15, 250, 15);
+            
+        }
+        #reset:active
+        {
+            background-color: rgb(15, 250, 15);
+            background-color: rgb(198, 195, 7);
+        }
+        ::placeholder        {
+            padding-left: 15px;
+        }
+     
+    </style>
+<script>
+    function pass()
+    {
+    var p=document.getElementById("p").value;
+   var cp=document.getElementById("cp").value;
+    if(p!=cp)
+    {
+        window.alert("Retype password ");
+    }
+    }
+    </script>
+
+</head>
+<body>
+    
+    <div>
+        <h1 style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">Let's Register </h1>
+    
+        <form>
+            <label>Name </label>
+            <br>
+            <input id="fname" onblur="myFunction()" type="text" placeholder="username">
+            <br> <br>
+            <label>Password</label>
+            <br>
+            <input id="p" type="password" placeholder="must contain atleast 8 alphanum char's">
+            <br><br>
+            <label> confirm Password</label>
+            <br>
+            <input  id="cp"  type="password" onblur="pass()" >
+            
+            <br><br>
+            <label>Phone Number</label>
+            <br>
+            <input type="tel" maxlength="10" autocomplete="off">
+            <br><br>
+    
+            <label>Email </label>
+            <br>
+            <input type="email" placeholder="eg : XXX.gmail.com">
+             <br>
+           
+            <br><br><br>
+            <input id="submit" style=" padding: 10px; width: 80px; font-weight: bolder; border-radius: 25px; height: 40px;width: 100px;" type="submit" value="SUBMIT" >
+            <input id="reset" style=" padding: 10px; width: 80px;float: right; font-weight: bolder; border-radius: 25px; height: 40px; width: 100px;" type="reset" value="RESET">
+
+        </form>
+    </div>
+   
+</body>
+</html>
