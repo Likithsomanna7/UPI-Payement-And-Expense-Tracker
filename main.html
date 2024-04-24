@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="module" src="script.js"></script>
    <link rel="stylesheet" href="maincss.css">
+   <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
 </head>
 <body>
     <div id="main">
@@ -28,12 +29,27 @@
             <option>gadjets</option>
         </datalist>
        </div>
-        <input type="text" id="amt" placeholder="enter the amount">
-        <div id="scanner"></div>
-       <input id="ibl" type="text" placeholder=" eg: xxx@ibl    or   yyy@axl">
+        <input  onfocus="function2()" type="text" id="amt" placeholder="enter the amount">
+        <div id="scanner"  onclick="function1()">
+            <video id="webcam" autoplay playsinlne width="800" height="600"></video>
+        </div>
+       <input    id="ibl" type="text" placeholder=" eg: xxx@ibl    or   yyy@axl">
        <button id="pay"><b>PAY</b></button>
     </div>
-  
+    <script>
+        function function1()
+        {
+            
+            document.getElementById("webcam").style.display="inline";
+    const webcame=document.getElementById("webcam");
+    const webcam =new Webcam(webcame);
+    webcam.start();
+        }
+        function function2()
+        {
+            document.getElementById("webcam").style.display="none";
+        }
+    </script>
    
     
     
