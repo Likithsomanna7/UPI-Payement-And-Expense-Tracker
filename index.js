@@ -1,7 +1,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import {add} from './sqloperation.js';
+import {add,bankinfoadd} from './sqloperation.js';
 import bodyParser from 'body-parser';
 import path from 'path';
 const app=express();
@@ -17,6 +17,10 @@ app.post('/bankinfo.html',async(req,res)=>{
     await add(req,res);
     res.redirect('/bankinfo.html');
 });
+app.post('/main.html',async(req,res)=>{
+    await bankinfoadd(req,res);
+    res.redirect('/main.html');
+})
 
 
 app.listen(3000,()=>{
