@@ -98,14 +98,14 @@
     <div>
         <h1 style="text-align: center; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;">Bank information </h1>
     
-        <form>
+        <form action="/main.html" method="post">
             <label> Bank Name </label>
             <br>
-            <input type="text" placeholder="eg : SBI,HDFC">
+            <input type="text" name="bankname" placeholder="eg : SBI,HDFC">
             <br> <br>
-            <label>Account type</label>
+            <label >Account type </label>
             <br>
-            <select >
+            <select name="account_type">
                 <option >Savings</option>
                 <option >Current</option>
                 <option >Recurring Deposit</option>
@@ -120,12 +120,12 @@
             <br><br>
             <label>confirm Account Number</label>
             <br>
-            <input id="cacc" type="password"  onblur="valid()">
+            <input id="cacc" type="password" name="account_number"  onblur="valid()">
             <br><br>
     
             <label>Initial deposit </label>
             <br>
-            <input type="text" placeholder="in rupees">
+            <input type="text" name="account_balance" placeholder="in rupees">
              <br>
            
             <br><br><br>
