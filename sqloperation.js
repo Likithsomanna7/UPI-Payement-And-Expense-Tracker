@@ -1,4 +1,12 @@
 import {connect} from './connect.js'
+export const checkname=async(req,res)=>{
+    let username=req.body.username;
+    console.log(username);
+    const [rows,feild]=await connect.query(`SELECT Name from Login WHERE Name=?`,[username])
+    console.log(rows);
+
+return [rows];
+}
 export const add=async(req,res)=>{
     let username=req.body.username;
     let password=req.body.password;
@@ -6,7 +14,7 @@ export const add=async(req,res)=>{
     let email=req.body.email;
     await connect.query(`INSERT INTO Login (Name,Password,PhoneNumber,Email)
     values(?,?,?,?)`,[username,password,phonenumber,email]);
-     return
+
 };
 
 export const bankinfoadd=async(req,res)=>{
@@ -30,3 +38,11 @@ export const bankinfoadd=async(req,res)=>{
 });
     
 };
+ export const userauth=async(req,res)=>{
+    let username=req.body.username;
+  let password=req.body.password;
+  const[rows,feilds]=await connect.query(`SELECT * FROM Login WHERE Name=? and Password=?`,[username,password]);
+  console.log(rows);
+  return [rows];
+
+}

@@ -22,3 +22,5 @@ FOREIGN KEY (User_id) REFERENCES Login(User_id)
 show tables;
 desc Login;
 select * from Login;
+desc bankinfo;
+select * from bankinfo;
