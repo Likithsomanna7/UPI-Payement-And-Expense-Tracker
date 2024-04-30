@@ -9,33 +9,37 @@
     <script type="module" src="script.js"></script>
    <link rel="stylesheet" href="maincss.css">
    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div id="main">
-       <div class="txtcont">
-        <input id="inp" type="text" list="items" placeholder="eg :groceries,fruits">
-        <datalist id="items" >
-            <option>fruits</option>
-            <option>groceries</option>
-            <option>recharges</option>
-            <option>vegetables</option>
-            <option>fastfoods</option>
-            <option>breakfast</option>
-            <option>launch</option>
-            <option>dinner</option>
-            <option>online shopping</option>
-            <option>friends</option>
-            <option>movie</option>
-            <option>gadjets</option>
-        </datalist>
-       </div>
-        <input  onfocus="function2()" type="text" id="amt" placeholder="enter the amount">
-        <div id="scanner"  onclick="function1()">
+    <form action="">
+     <div id="main">
+           <div class="txtcont">
+            <input id="inp" type="text" list="items" placeholder="eg :groceries,fruits">
+            <datalist id="items" >
+                <option>fruits</option>
+                <option>groceries</option>
+                <option>recharges</option>
+                <option>vegetables</option>
+                <option>fastfoods</option>
+                <option>breakfast</option>
+                <option>launch</option>
+                <option>dinner</option>
+                <option>online shopping</option>
+                <option>friends</option>
+                <option>movie</option>
+                <option>gadjets</option>
+            </datalist>
+            </div>
+            <input  onfocus="function2()" type="text" id="amt" placeholder="enter the amount">
+            <div id="scanner"  onclick="function1()">
             <video id="webcam" autoplay playsinlne width="800" height="600"></video>
         </div>
        <input    id="ibl" type="text" placeholder=" eg: xxx@ibl    or   yyy@axl">
        <button id="pay"><b>PAY</b></button>
     </div>
+    </form>
     <script>
         function function1()
         {
@@ -50,8 +54,9 @@
             document.getElementById("webcam").style.display="none";
         }
     </script>
+    <form action=""></form>
    
-    
-    
+   <a><i class="fa-solid fa-right-from-bracket" style="font-size: 1.75em;"></i></a>
+    </form>
 </body>
 </html>

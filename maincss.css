@@ -132,3 +132,28 @@ body{
     flex:1;
     padding-left: 10%;
 }
+#webcam{
+    height:190px;
+    width: 190px;
+    margin-top: -27px;
+    margin-left: -30px;
+    
+   }
+   a
+   {
+    position: fixed;
+    left:10%;
+    top:10%
+
+   }
+   i{
+    color: white;
+    background-size:400px;
+
+
+   }
+i:hover
+{
+    transform: scale(1.3);
+
+}
