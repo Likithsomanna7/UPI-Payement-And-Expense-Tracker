@@ -31,6 +31,13 @@ app.use(session({
     }
 
 }))
+const isauth=(req,res,next)=>{
+    if(req.session.auth){
+        next();
+    }else{
+        res.redirect('/login');
+    }
+}
  app.get('/newuse',function(req,res){
     res.render('newuse',{alertmessage:""});
   });
@@ -45,6 +52,7 @@ app.use(session({
         return res.render('newuse',{alertmessage:'username exists'});
     }
     add(req,res);
+    req.session.auth=true;
     return res.redirect('/bankinfo.html');
 }).catch((err)=>{
     console.log(err);
@@ -52,9 +60,9 @@ app.use(session({
 });
 
 
-app.post('/main.html',async(req,res)=>{
+app.post('/bankinfo.html',async(req,res)=>{
     await bankinfoadd(req,res);
-    res.redirect('/main.html');
+    res.redirect('main');
 })
 
 app.get('/login',function(req,res){
@@ -67,7 +75,7 @@ app.post('/login',async(req,res)=>{
         console.log(results.length)
         if(results.length>0){
             req.session.auth=true;
-           return res.redirect('/main.html');
+           return res.redirect('main');
         }
         else{
            return res.render('login',{message:'invalid username or password'});
@@ -76,6 +84,18 @@ app.post('/login',async(req,res)=>{
         console.log(err);
     })
 });
+app.get('/main',isauth,async(req,res)=>{
+    res.render('main');
+})
+app.post('/logout',async(req,res)=>{
+    req.session.destroy((err)=>{
+        if(err) throw err;
+        else{
+            res.redirect('/');
+        }
+    })
+})
+
 
 app.listen(3000,()=>{
     console.log("listening to port 3000");
