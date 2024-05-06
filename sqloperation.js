@@ -14,6 +14,9 @@ export const add=async(req,res)=>{
     let email=req.body.email;
     await connect.query(`INSERT INTO Login (Name,Password,PhoneNumber,Email)
     values(?,?,?,?)`,[username,password,phonenumber,email]);
+    const [rows,feilds]=await connect.query(`SELECT User_id from Login WHERE Name=?`,[username])
+    console.log(rows);
+    return [rows];
 
 };
 
@@ -30,6 +33,7 @@ export const bankinfoadd=async(req,res)=>{
         return User_id;
     
 }).then((User_id)=>{
+    res.cookie('user_id',User_id,{signed:true});
     connect.query(`INSERT INTO bankinfo(User_id,BanKName,Account_No,Account_Type,AccountBalance)
     values(?,?,?,?,?)`,[User_id,bankname,account_number,account_type,account_balance]);
 })
@@ -45,4 +49,27 @@ export const bankinfoadd=async(req,res)=>{
   console.log(rows);
   return [rows];
 
+};
+
+export const transaction=async(req,res)=>{
+    const items=req.body.items;
+    const upi_id=req.body.upi_id;
+    const amount=req.body.amount;
+   
+    await connect.query(`START TRANSACTION`);
+    await connect.query(`BEGIN;`);
+    await connect.query(`SELECT * FROM bankinfo WHERE User_id=? FOR UPDATE`,[req.signedCookies.user_id]);
+    const [balance,feilds]=await connect.query(`SELECT AccountBalance from bankinfo WHERE User_id=?`,[req.signedCookies.user_id]);
+    console.log(balance[0].AccountBalance);
+    if((balance[0].AccountBalance)-amount>=0){
+    await connect.query(`UPDATE bankinfo SET AccountBalance=? where User_id=?`,[balance[0].AccountBalance-amount,req.signedCookies.user_id]);
+    await connect.query('INSERT INTO transaction values(?,?,?,?,?,NOW())',[req.signedCookies.user_id,req.signedCookies.username,items,amount,upi_id]);
+    await connect.query(`COMMIT`);
+    return 1;
+    }else{
+        await connect.query(`ROLLBACK`);
+        return 0;
+    }
+
+    
 }

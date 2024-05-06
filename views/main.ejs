@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <% if(message.length>0){ %>
+    <script>
+        alert('<%= message %>')
+    </script>
+<% } %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -13,30 +17,22 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <form action="">
+    <form action="/main" method="post">
      <div id="main">
            <div class="txtcont">
-            <input id="inp" type="text" list="items" placeholder="eg :groceries,fruits">
+            <input id="inp" type="text" name="items" list="items" placeholder="eg :groceries,fruits">
             <datalist id="items" >
-                <option>fruits</option>
-                <option>groceries</option>
-                <option>recharges</option>
-                <option>vegetables</option>
-                <option>fastfoods</option>
-                <option>breakfast</option>
-                <option>launch</option>
-                <option>dinner</option>
-                <option>online shopping</option>
-                <option>friends</option>
-                <option>movie</option>
-                <option>gadjets</option>
+                <option>food and groceries</option>
+                <option>child expense</option>
+                <option>housing expense</option>
+                <option>miscellaneous</option>
             </datalist>
             </div>
-            <input  onfocus="function2()" type="text" id="amt" placeholder="enter the amount">
+            <input  onfocus="function2()" type="text" name="amount" id="amt" placeholder="enter the amount">
             <div id="scanner"  onclick="function1()">
             <video id="webcam" autoplay playsinlne width="800" height="600"></video>
         </div>
-       <input    id="ibl" type="text" placeholder=" eg: xxx@ibl    or   yyy@axl">
+       <input  id="ibl" type="text" name="upi_id" placeholder=" eg: xxx@ibl    or   yyy@axl">
        <button id="pay"><b>PAY</b></button>
     </div>
     </form>
