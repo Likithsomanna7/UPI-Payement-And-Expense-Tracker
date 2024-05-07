@@ -2,8 +2,9 @@ import express from 'express';
 import { connect } from './connect.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import {checkname,add,bankinfoadd,userauth} from './sqloperation.js';
+import {checkname,add,bankinfoadd,userauth,transaction} from './sqloperation.js';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import session from 'express-session';
 import MySQLStoreFactory from 'express-mysql-session';
@@ -11,6 +12,7 @@ const MySQLStore = MySQLStoreFactory(session);
 const app=express();
 app.set('view engine','ejs');
 app.use(express.json());
+app.use(cookieParser('djhjsdkf'));
 app.use(bodyParser.urlencoded({ extended: false }));
 const sessionstore=new MySQLStore({createDatabaseTable:true},connect);
 const __filename=fileURLToPath(import.meta.url);
@@ -38,25 +40,33 @@ const isauth=(req,res,next)=>{
         res.redirect('/login');
     }
 }
- app.get('/newuse',function(req,res){
-    res.render('newuse',{alertmessage:""});
-  });
 
- 
- app.post('/newuse',async(req,res)=>{
+const check=async(req,res,next)=>{
     await checkname(req,res)
     .then(([rows])=>{
     console.log(rows); 
     if(rows.length){
         console.log("user exists");
         return res.render('newuse',{alertmessage:'username exists'});
+    }else{
+        next();
     }
-    add(req,res);
+    }).catch((err)=>{
+        console.log(err);
+    })
+}
+ app.get('/newuse',function(req,res){
+    res.render('newuse',{alertmessage:""});
+  });
+
+ 
+ app.post('/newuse',check,async(req,res)=>{
+
+    const [row]=await add(req,res);
     req.session.auth=true;
+    res.cookie('user_id',row[0].user_id,{signed:true,sameSite:true,httpOnly:true});
+    res.cookie('username',req.body.username,{signed:true,sameSite:true,httpOnly:true});
     return res.redirect('/bankinfo.html');
-}).catch((err)=>{
-    console.log(err);
-})
 });
 
 
@@ -75,6 +85,9 @@ app.post('/login',async(req,res)=>{
         console.log(results.length)
         if(results.length>0){
             req.session.auth=true;
+            console.log(results[0].User_id);
+            res.cookie('user_id',results[0].User_id,{signed:true,sameSite:true,httpOnly:true});
+            res.cookie('username',req.body.username,{signed:true,sameSite:true,httpOnly:true});
            return res.redirect('main');
         }
         else{
@@ -85,7 +98,7 @@ app.post('/login',async(req,res)=>{
     })
 });
 app.get('/main',isauth,async(req,res)=>{
-    res.render('main');
+    res.render('main',{message:""});
 })
 app.post('/logout',async(req,res)=>{
     req.session.destroy((err)=>{
@@ -94,6 +107,21 @@ app.post('/logout',async(req,res)=>{
             res.redirect('/');
         }
     })
+})
+
+app.post('/main',async(req,res)=>{
+    await transaction(req,res)
+    .then((results)=>{
+        console.log(results);
+        if(results){
+            return res.render('main',{message:'Transaction succesfull'});
+        }else{
+            return res.render('main',{message:'insufficiant balance'});
+        }
+    }).catch((err)=>{
+        if(err) throw err;
+    })
+
 })
 
 
