@@ -2,7 +2,7 @@ import express from 'express';
 import { connect } from './connect.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import {checkname,add,bankinfoadd,userauth,transaction} from './sqloperation.js';
+import {checkname,add,bankinfoadd,userauth,transaction,transactiondata} from './sqloperation.js';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -124,6 +124,13 @@ app.post('/main',async(req,res)=>{
 
 })
 
+
+app.get('/trasaction',async(req,res)=>{
+    const [data]=await transactiondata(req,res);
+    console.log(data);
+    console.log("kk");
+    res.status(200).json({data});
+})
 
 app.listen(3000,()=>{
     console.log("listening to port 3000");
