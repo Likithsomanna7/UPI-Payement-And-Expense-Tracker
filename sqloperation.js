@@ -73,3 +73,8 @@ export const transaction=async(req,res)=>{
 
     
 }
+
+export const transactiondata=async(req,res)=>{
+    const [data,feilds]=await connect.query(`select * from transaction where User_id=? and Name =?`,[req.signedCookies.user_id,req.signedCookies.username])
+    return [data];
+}

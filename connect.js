@@ -4,7 +4,7 @@ dotenv.config();
 export const connect=createPool({
     host:'localhost',
     user:'root',
-    password:'Likith@123',
+    password:'12345',
     database:'upi'
 
 }).promise();

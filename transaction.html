@@ -45,10 +45,33 @@
 <body>
     <div id="odiv">
         <div id="id1" class="indiv"><h4>ITEMS </h4><hr></div>
-        <div  class="indiv"><h4>AMOUNT</h4><hr></div>
-        <div class="indiv"><h4>UPI ID</h4><hr></div>
+        <div id="id0" class="indiv"><h4>AMOUNT</h4><hr></div>
+        <div id="id3" class="indiv"><h4>UPI ID</h4><hr></div>
         <div id="id2" class="indiv"><h4>TRANSACTION TIME</h4><hr></div>
     </div>
-    
+    <script>
+        console.log("ll");
+    fetch('/trasaction')
+    .then(response=>response.json())
+    .then((data)=>{
+        console.log(data.data);
+        console.log('hi');
+        for(i=0;i<data.data.length;i++){
+        const para=document.createElement("p");
+        const para1=document.createElement("p");
+        const para2=document.createElement("p");
+        const para3=document.createElement("p");
+        para.innerHTML=data.data[i].Items;
+        para1.innerHTML=data.data[i].Amount;
+        para2.innerHTML=data.data[i].Upi_id;
+        para3.innerHTML=data.data[i].Transaction_time;
+        document.getElementById('id1').appendChild(para);
+        document.getElementById('id0').appendChild(para1);
+        document.getElementById('id3').appendChild(para2);
+        document.getElementById('id2').appendChild(para3);
+        }
+    })
+</script>
+
 </body>
 </html>
