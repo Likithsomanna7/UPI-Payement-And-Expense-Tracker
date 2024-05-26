@@ -24,7 +24,7 @@
             border-bottom:4px solid rgb(4, 4, 4); 
             border-top: 4px solid rgb(4, 4, 4);
             background-color: rgb(193, 255, 255);
-            overflow: scroll;
+         
           
         }
         #id1
@@ -39,20 +39,25 @@
         {
             border-top: 3px solid rgb(4, 0, 20);
         }
-        .indiv::-webkit-scrollbar
+        .test::-webkit-scrollbar
          {
         display: none;
         }
-      
+      .test
+      {
+        overflow: scroll;
+        max-height: 570px;
+        text-align: center;
+      }
     
     </style>
 </head>
 <body>
     <div id="odiv">
-        <div id="id1" class="indiv"><h4>ITEMS </h4><hr></div>
-        <div id="id0" class="indiv"><h4>AMOUNT</h4><hr></div>
-        <div id="id3" class="indiv"><h4>UPI ID</h4><hr></div>
-        <div id="id2" class="indiv"><h4>TRANSACTION TIME</h4><hr></div>
+        <div id="id1" class="indiv"><h4>ITEMS </h4><hr><div id="og1" class="test"></div></div>
+        <div id="id0" class="indiv"><h4>AMOUNT</h4><hr><div id="og2" class="test"></div></div>
+        <div id="id3" class="indiv"><h4>UPI ID</h4><hr><div id="og3" class="test"></div></div>
+        <div id="id2" class="indiv"><h4>TRANSACTION TIME</h4><hr><div id="og4" class="test"></div></div>
     </div>
     <script>
         console.log("ll");
@@ -70,10 +75,10 @@
         para1.innerHTML=data.data[i].Amount;
         para2.innerHTML=data.data[i].Upi_id;
         para3.innerHTML=data.data[i].Transaction_time;
-        document.getElementById('id1').appendChild(para);
-        document.getElementById('id0').appendChild(para1);
-        document.getElementById('id3').appendChild(para2);
-        document.getElementById('id2').appendChild(para3);
+        document.getElementById('og1').appendChild(para);
+        document.getElementById('og2').appendChild(para1);
+        document.getElementById('og3').appendChild(para2);
+        document.getElementById('og4').appendChild(para3);
         }
     })
 </script>
