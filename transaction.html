@@ -7,7 +7,6 @@
     <style>
         #odiv
         {
-
             display:flex;
             flex-direction: row;
             padding: 40px;
@@ -25,6 +24,8 @@
             border-bottom:4px solid rgb(4, 4, 4); 
             border-top: 4px solid rgb(4, 4, 4);
             background-color: rgb(193, 255, 255);
+            overflow: scroll;
+          
         }
         #id1
         {
@@ -38,7 +39,11 @@
         {
             border-top: 3px solid rgb(4, 0, 20);
         }
-    
+        .indiv::-webkit-scrollbar
+         {
+        display: none;
+        }
+      
     
     </style>
 </head>
