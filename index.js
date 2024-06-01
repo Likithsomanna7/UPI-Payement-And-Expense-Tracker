@@ -2,7 +2,7 @@ import express from 'express';
 import { connect } from './connect.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import {checkname,add,bankinfoadd,userauth,transaction,transactiondata} from './sqloperation.js';
+import {checkname,add,bankinfoadd,userauth,transaction,transactiondata,monthlydata,yearlydata} from './sqloperation.js';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -108,13 +108,15 @@ app.post('/logout',async(req,res)=>{
         }
     })
 })
-
+app.get('/sucess',async(req,res)=>{
+    res.sendFile(path.join(__dirname,'sucess.html'));
+ })
 app.post('/main',async(req,res)=>{
     await transaction(req,res)
     .then((results)=>{
         console.log(results);
         if(results){
-            return res.render('main',{message:'Transaction succesfull'});
+            return res.redirect('/sucess');
         }else{
             return res.render('main',{message:'insufficiant balance'});
         }
@@ -125,6 +127,8 @@ app.post('/main',async(req,res)=>{
 })
 
 
+
+
 app.get('/trasaction',async(req,res)=>{
     const [data]=await transactiondata(req,res);
     console.log(data);
@@ -132,6 +136,23 @@ app.get('/trasaction',async(req,res)=>{
     res.status(200).json({data});
 })
 
+app.get('/chartmonthly',async(req,res)=>{
+    const data=await monthlydata(req,res);
+    console.log(data);
+    console.log(data[0][0]);
+    const data1=data[0][data.length-1];
+    console.log("monthly data fetched succesfully");
+    res.status(200).json({data1});
+})
+
+app.get('/chartyearly',async(req,res)=>{
+    const data=await yearlydata(req,res);
+    console.log("yearly data fetched succesfully");
+    console.log(data[0][0]);
+    const data2=data[0][data.length-1];
+    res.status(200).json({data2});
+
+})
 app.listen(3000,()=>{
     console.log("listening to port 3000");
 })

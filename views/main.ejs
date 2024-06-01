@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% if(message.length>0){ %>
-    <script>
-        alert('<%= message %>')
-    </script>
-<% } %>
+    <script>   
+     window.addEventListener('pageshow',function(event){
+        console.log(event.persisted);
+        if(event.persisted){
+            
+            window.location.reload(true);
+        }
+    });</script>
+
+    <% if(message=='insufficiant balance'){ %>
+        <script>
+            alert('<%= message %>');
+        </script>
+    <%}%>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -19,8 +29,8 @@
 <body>
     <div id="out">
         <button class="b1" onclick="window.location.href='transaction.html'">TRANSACTION HISTORY</button>
-        <button class="b1" window.location.href="">MONTHLY EXPENSE</button>
-        <button class="b1" window.location.href="" >YEARLY EXPENSE</button>
+        <button class="b1" onclick="window.location.href='chartmonthly.html'">MONTHLY EXPENSE</button>
+        <button class="b1" onclick="window.location.href='chartyearly.html'" >YEARLY EXPENSE</button>
     </div>
     <form action="/main" method="post">
      <div id="main">
@@ -54,6 +64,7 @@
         {
             document.getElementById("webcam").style.display="none";
         }
+
     </script>
     <form action="/logout" method="post">
    <button>

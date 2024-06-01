@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="chart.css">
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <canvas id="month" width="800px" height="500px"></canvas>
+    <script>
+        var data2=[];
+        const labels=["FoodandGroceries","ChildExpense","HousingExpense","Misellaneous"]
+        fetch('/chartmonthly')
+        .then(response=>response.json())
+        .then((data)=>{
+            console.log("chartmonthly route hit succesfully");
+            console.log(data)
+            console.log(data.data1.Food_and_groceries);
+            data2=[data.data1.Food_and_groceries,data.data1.Child_expense,data.data1.Housing_expense,data.data1.Misellenious];
+            var id=document.getElementById('month');
+        const monthchart=new Chart(id,{
+            type:'bar',
+            data:{
+                labels:labels,
+                datasets:[
+                    {
+                        label:'expenditure',
+                data:data2,
+                backgroundColor:[
+                "rgba(255, 99, 132, 0.6)",
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+                "rgba(75, 192, 192, 0.6)"
+                ]
+                    },
+            
+        ],
+        },options:{
+            responsive:false,
+    maintainAspectratio:false
+        }
+        })
+        })
+        
+
+    </script>
+    </body>
+</html>
