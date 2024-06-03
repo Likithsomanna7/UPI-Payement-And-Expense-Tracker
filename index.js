@@ -140,7 +140,9 @@ app.get('/chartmonthly',async(req,res)=>{
     const data=await monthlydata(req,res);
     console.log(data);
     console.log(data[0][0]);
-    const data1=data[0][data.length-1];
+    const data1=data[data.length - 1][data[data.length - 1].length - 1];    ;
+    console.log("data1:");
+    console.log(data1);
     console.log("monthly data fetched succesfully");
     res.status(200).json({data1});
 })
@@ -149,7 +151,8 @@ app.get('/chartyearly',async(req,res)=>{
     const data=await yearlydata(req,res);
     console.log("yearly data fetched succesfully");
     console.log(data[0][0]);
-    const data2=data[0][data.length-1];
+    const data2=data[data.length - 1][data[data.length - 1].length - 1];
+    
     res.status(200).json({data2});
 
 })

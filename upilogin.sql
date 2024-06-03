@@ -53,14 +53,14 @@ desc YEARLY_TABLE;
 delimiter //
 CREATE EVENT MONTHLY_TOTAL
 ON schedule EVERY 1 MONTH
-STARTS '2024-06-01 12:00:00'
+STARTS '2024-06-01 13:34:00'
 DO
 BEGIN
 INSERT INTO MONTHLY_TOTAL
 SELECT User_id,Name,sum(CASE WHEN Items='food and groceries' THEN Amount ELSE 0 END),
 sum(CASE WHEN Items='child expense' THEN Amount ELSE 0 END),
 sum(CASE WHEN Items='housing expense' THEN Amount ELSE 0 END),
-sum(CASE WHEN Items='misellenious' THEN Amount ELSE 0 END),
+sum(CASE WHEN Items='miscellaneous' THEN Amount ELSE 0 END),
 sum(Amount),MONTHNAME(CURDATE()-INTERVAL 1 MONTH),YEAR(CURDATE()-INTERVAL 1 MONTH)
 FROM transaction 
 where MONTH(Transaction_time)=MONTH(CURDATE()-INTERVAL 1 MONTH)
@@ -83,11 +83,14 @@ where Year=YEAR(CURDATE()-INTERVAL 1 YEAR)
 GROUP BY User_id,Name;
 END//
 insert into MONTHLY_TOTAL values(82,'jyoti',200,200,200,20000,800,'january',2024);
+insert into YEARLY_TABLE values(82,'jyoti',200,200,200,100,800,2024);
 alter table MONTHLY_TOTAL add foreign key(User_id) references bankinfo(User_id);
 show tables;
 desc MONTHLY_TOTAL;
+drop event MONTHLY_TOTAL;
 select * from transaction;
 select * from MONTHLY_TOTAL;
+select* from YEARLY_TABLE;
 alter table transaction drop column type;
 select * from sessions;
 desc Login;
@@ -96,6 +99,15 @@ desc bankinfo;
 select * from bankinfo;
 set sql_safe_updates=0;
 truncate sessions;
+truncate YEARLY_TABLE;
 delete from Login;
 delete from bankinfo;
 set sql_safe_updates=1;
+show events;
+SHOW EVENTS LIKE 'MONTHLY_TOTAL';
+set global event_scheduler = on;
+
+SHOW VARIABLES LIKE 'event_scheduler';
+SELECT NOW(), @@global.time_zone, @@session.time_zone;
+
+
