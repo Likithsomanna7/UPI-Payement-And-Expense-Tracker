@@ -82,7 +82,7 @@ FROM MONTHLY_TOTAL
 where Year=YEAR(CURDATE()-INTERVAL 1 YEAR)
 GROUP BY User_id,Name;
 END//
-
+insert into MONTHLY_TOTAL values(82,'jyoti',200,200,200,20000,800,'january',2024);
 alter table MONTHLY_TOTAL add foreign key(User_id) references bankinfo(User_id);
 show tables;
 desc MONTHLY_TOTAL;

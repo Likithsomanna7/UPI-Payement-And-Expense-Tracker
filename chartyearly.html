@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="chartyearly.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <canvas id="yearly" width="800px" height="500px"></canvas>
+    <script>
+        var data3=[];
+         const labels=["FoodandGroceries","ChildExpense","HousingExpense","Misellaneous"]
+        fetch('/chartyearly')
+        .then(response=>response.json())
+        .then((data)=>{
+             data3=[data.data2.Food_and_groceries,data.data2.Child_expense,data.data2.Housing_expense,data.data2.Misellenious];
+             var id=document.getElementById('yearly');
+             const yearchart=new Chart(id,{
+                type:'bar',
+                data:{
+                labels:labels,
+                datasets:[
+                    {
+                    label:'expenditure',
+                    data:data3,
+                    backgroundColor:[
+                "rgba(255, 99, 132, 0.6)",
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+                "rgba(75, 192, 192, 0.6)"
+                ]
+                    }
+                ]
+                },options:{
+                    responsive:false,
+                    maintainAspectratio:false
+                }
+             })
+        })
+    </script>
+</body>

@@ -78,3 +78,13 @@ export const transactiondata=async(req,res)=>{
     const [data,feilds]=await connect.query(`select * from transaction where User_id=? and Name =?`,[req.signedCookies.user_id,req.signedCookies.username])
     return [data];
 }
+
+export const monthlydata=async(req,res)=>{
+    const [data,feilds]=await connect.query(`select * from MONTHLY_TOTAL WHERE User_name=? and User_id=?`,[req.signedCookies.username,req.signedCookies.user_id])
+    return [data];
+}
+
+export const yearlydata=async(req,res)=>{
+    const [data,feilds]=await connect.query(`select * from YEARLY_TABLE WHERE User_name=? and User_id=? `,[req.signedCookies.username,req.signedCookies.user_id])
+    return [data];
+}
